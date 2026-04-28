@@ -4,6 +4,11 @@ public class Vacuum : MonoBehaviour
 {
     public float pullSpeed = 5f;
     public string targetTag = "Item";
+    private Inventory inventory;
+    void Awake()
+    {
+        inventory = FindObjectOfType<Inventory>();
+    }
     private void OnTriggerStay(Collider other)
     {
         if (other.CompareTag(targetTag))
@@ -29,6 +34,8 @@ public class Vacuum : MonoBehaviour
     void OnCollect(GameObject obj)
     {
         // Add to inventory logic here
+        //inventory.currentCapacity++;
+        inventory.currentCapacity.Add(obj.GetComponent<RGBCube>().colorType);
         Debug.Log("Object Collected!");
         Destroy(obj); 
     }

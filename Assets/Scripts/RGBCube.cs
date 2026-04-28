@@ -3,6 +3,7 @@ using UnityEngine;
 public class RGBCube : MonoBehaviour
 {
     private Renderer RGBrenderer;
+    public string colorType;
     void Awake()
     {
         RGBrenderer = gameObject.GetComponent<Renderer>();
@@ -11,12 +12,15 @@ public class RGBCube : MonoBehaviour
         {
             case 0:
                 RGBrenderer.material.color = Color.red;
+                colorType = "Red";
                 break;
             case 1:
                 RGBrenderer.material.color = Color.green;
+                colorType = "Green";
                 break;
             case 2:
                 RGBrenderer.material.color = Color.blue;
+                colorType = "Blue";
                 break;
         }
     }
