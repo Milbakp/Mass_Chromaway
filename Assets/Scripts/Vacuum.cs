@@ -7,7 +7,7 @@ public class Vacuum : MonoBehaviour
     private Inventory inventory;
     void Awake()
     {
-        inventory = FindObjectOfType<Inventory>();
+        inventory = FindAnyObjectByType<Inventory>();
     }
     private void OnTriggerStay(Collider other)
     {
@@ -35,7 +35,7 @@ public class Vacuum : MonoBehaviour
     {
         // Add to inventory logic here
         //inventory.currentCapacity++;
-        inventory.currentCapacity.Add(obj.GetComponent<RGBCube>().colorType);
+        inventory.AddToCapacity(obj.GetComponent<RGBCube>().colorType);
         Debug.Log("Object Collected!");
         Destroy(obj); 
     }

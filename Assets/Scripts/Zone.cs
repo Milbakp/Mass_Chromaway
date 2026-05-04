@@ -7,8 +7,10 @@ public class Zone : MonoBehaviour
     public GameObject cubePrefab;
     public List<GameObject> cubesInZone = new List<GameObject>();
     public int numberOfCubes = 5;
+    public bool zoneSpecial = false, removeSpcieal = false;
     void Start()
     {
+        removeCubesInZone();
         createCubesInZone();
     }
 
@@ -40,6 +42,7 @@ public class Zone : MonoBehaviour
             cube.transform.parent = this.transform;
             cubesInZone.Add(cube);
         }
+        zoneSpecial = true;
     }
 
     public void removeCubesInZone()
@@ -49,5 +52,6 @@ public class Zone : MonoBehaviour
             Destroy(cube);
         }
         cubesInZone.Clear();
+        removeSpcieal = true;
     }
 }
