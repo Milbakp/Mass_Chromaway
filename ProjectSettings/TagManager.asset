@@ -6,6 +6,7 @@ TagManager:
   tags:
   - RGBCube
   - Ground
+  - Obstacle
   layers:
   - Default
   - TransparentFX

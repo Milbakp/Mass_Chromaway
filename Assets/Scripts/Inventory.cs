@@ -15,6 +15,7 @@ public class Inventory : MonoBehaviour
     public List<string> currentCapacity = new List<string>();
     private List<InventoryItem> inventoryItems = new List<InventoryItem>();
     private Dictionary<string, int> colorCounts = new Dictionary<string, int>();
+    public bool isGameOver = false;
     void Start()
     {
         currentCapacity.Clear();
@@ -33,9 +34,10 @@ public class Inventory : MonoBehaviour
     void Update()
     {
         CheckForThrees();
-        if (currentCapacity.Count >= maxCapacity)
+        if (currentCapacity.Count >= maxCapacity && !isGameOver)
         {
             Debug.Log("Inventory is full!");
+            isGameOver = true;
         }
     }
 
@@ -50,25 +52,6 @@ public class Inventory : MonoBehaviour
 
     public void CheckForThrees()
     {
-        // int redCount = 0;
-        // int greenCount = 0;
-        // int blueCount = 0;
-        // foreach(string color in currentCapacity)
-        // {
-        //     switch(color)
-        //     {
-        //         case "Red":
-        //             redCount++;
-        //             break;
-        //         case "Green":
-        //             greenCount++;
-        //             break;
-        //         case "Blue":
-        //             blueCount++;
-        //             break;
-        //     }
-        // }
-
         if (colorCounts["Red"] >= 3)
         {
             currentCapacity.RemoveAll(c => c == "Red");
@@ -111,5 +94,11 @@ public class Inventory : MonoBehaviour
             colorCounts["Blue"] = 0;
             Debug.Log("Removed three blue cubes!");
         }
+    }
+    public void shatterCubes()
+    {
+        int rand = Random.Range(0, currentCapacity.Count);
+        InventoryItem cubeToShatter = inventoryItems[rand];
+        AddToCapacity(cubeToShatter.color);
     }
 }

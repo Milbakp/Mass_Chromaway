@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -9,6 +10,8 @@ public class GameManager : MonoBehaviour
     //public List<sectionInfo> ActiveSections = new List<sectionInfo>();
     //public List<GameObject> sectionsToRemove = new List<GameObject>();
     public float floorSpeed = 2;
+    public Inventory inventory = new Inventory();
+    public GameObject gameOverScreen;
     public struct sectionInfo
     {
         public bool isActive;
@@ -21,6 +24,9 @@ public class GameManager : MonoBehaviour
         GameObject tmp2 = Instantiate(section2, new Vector3(0, 0, 400), Quaternion.identity);
         sections.Add(tmp);
         sections.Add(tmp2);
+
+        inventory = FindAnyObjectByType<Inventory>();
+        gameOverScreen.SetActive(false);
 
         // GameObject tmp3 = Instantiate(section2, new Vector3(0, 0, 100), Quaternion.identity);
         // GameObject tmp4 = Instantiate(section2, new Vector3(0, 0, 400), Quaternion.identity);
@@ -77,6 +83,11 @@ public class GameManager : MonoBehaviour
                 sec.transform.localPosition = new Vector3(0, 0, 420);
             }
         }
+        if (inventory.isGameOver && !gameOverScreen.activeSelf)
+        {
+            Time.timeScale = 0f;
+            gameOverScreen.SetActive(true);
+        }
     }
 
     // public void randomSectionActivation()
@@ -100,5 +111,11 @@ public class GameManager : MonoBehaviour
     //         Debug.Log("No active members found.");
     //     }
     // }
+
+    public void reload()
+    {
+        Time.timeScale = 1f;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
 
 }

@@ -167,16 +167,16 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 649cd386664b06c40a9028d3d774c8e3, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 5818012755017222657}
+      addedObject: {fileID: 4764967221727720566}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 649cd386664b06c40a9028d3d774c8e3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 6448295632124671955}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 649cd386664b06c40a9028d3d774c8e3, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 7894764308151908248}
+      addedObject: {fileID: 5818012755017222657}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 649cd386664b06c40a9028d3d774c8e3, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 4764967221727720566}
+      addedObject: {fileID: 7894764308151908248}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 649cd386664b06c40a9028d3d774c8e3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 3508692648586603536}
@@ -186,22 +186,27 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 649cd386664b06c40a9028d3d774c8e3, type: 3}
   m_PrefabInstance: {fileID: 9164362037325202627}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &5818012755017222657
-MonoBehaviour:
+--- !u!65 &4764967221727720566
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8353952347911960978}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cbff6ab7198ea854e9089bc78f3e64f6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerSpeed: 2
-  horizontalSpeed: 5
-  leftMax: -9
-  rightMax: 9
+  serializedVersion: 3
+  m_Size: {x: 0.023514062, y: 0.02, z: 0.020273056}
+  m_Center: {x: 0, y: 0, z: 0.00013652816}
 --- !u!54 &6448295632124671955
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -229,6 +234,22 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 96
   m_CollisionDetection: 0
+--- !u!114 &5818012755017222657
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8353952347911960978}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cbff6ab7198ea854e9089bc78f3e64f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerSpeed: 2
+  horizontalSpeed: 5
+  leftMax: -9
+  rightMax: 9
 --- !u!114 &7894764308151908248
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -247,29 +268,9 @@ MonoBehaviour:
     m_Bits: 64
   groundCheck: {fileID: 5894663621507024620}
   checkRadius: 0.3
+  spaceHoldTime: 0
   fallMultiplier: 2.5
   lowJumpMultiplier: 2
---- !u!65 &4764967221727720566
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8353952347911960978}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.023514062, y: 0.02, z: 0.020273056}
-  m_Center: {x: 0, y: 0, z: 0.00013652816}
 --- !u!114 &3508692648586603536
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -286,6 +287,7 @@ MonoBehaviour:
   inventorySlotPrefab: {fileID: 3740255693832583710, guid: 6475cb96bbe21394dbf75057befdb458, type: 3}
   inventorySlotParent: {fileID: 0}
   currentCapacity: []
+  isGameOver: 0
 --- !u!4 &8693323640363901736 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 649cd386664b06c40a9028d3d774c8e3, type: 3}
