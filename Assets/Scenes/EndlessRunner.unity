@@ -232,7 +232,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.000030517578, y: 138.10797}
+  m_AnchoredPosition: {x: 0, y: 50}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &508067295
@@ -266,10 +266,10 @@ MonoBehaviour:
     m_Right: 0
     m_Top: 0
     m_Bottom: 0
-  m_ChildAlignment: 0
+  m_ChildAlignment: 1
   m_Spacing: 1
   m_ChildForceExpandWidth: 1
-  m_ChildForceExpandHeight: 1
+  m_ChildForceExpandHeight: 0
   m_ChildControlWidth: 0
   m_ChildControlHeight: 0
   m_ChildScaleWidth: 0
@@ -1063,7 +1063,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   section: {fileID: 2961842889421348805, guid: bd60b19256ee24444bfe917c2eb471a8, type: 3}
   section2: {fileID: 2961842889421348805, guid: 281a0b48ba9d50649849e376040794fa, type: 3}
-  sections: []
+  section3: {fileID: 2961842889421348805, guid: 12fb8b6f52c97f14099fb0b47931b910, type: 3}
+  section4: {fileID: 2961842889421348805, guid: 01263f6afc9183d478efe6a0c07078f0, type: 3}
   floorSpeed: 20
   inventory: {fileID: 0}
   gameOverScreen: {fileID: 1238817611}
@@ -1118,7 +1119,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 376.21594}
+  m_SizeDelta: {x: 50, y: 200}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1672024668
 MonoBehaviour:

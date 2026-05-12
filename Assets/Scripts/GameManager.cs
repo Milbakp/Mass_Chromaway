@@ -5,58 +5,30 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    public GameObject section, section2;
-    public List<GameObject> sections = new List<GameObject>();
-    //public List<sectionInfo> ActiveSections = new List<sectionInfo>();
-    //public List<GameObject> sectionsToRemove = new List<GameObject>();
+    public GameObject section, section2, section3, section4;
+    public List<sectionInfo> sections = new List<sectionInfo>();
     public float floorSpeed = 2;
     public Inventory inventory = new Inventory();
     public GameObject gameOverScreen;
-    public struct sectionInfo
+    public class sectionInfo
     {
         public bool isActive;
-        public string sectionType;
+        // public string sectionType;
         public GameObject section;
     }
     void Start()
     {
         GameObject tmp = Instantiate(section, new Vector3(0, 0, 100), Quaternion.identity);
         GameObject tmp2 = Instantiate(section2, new Vector3(0, 0, 400), Quaternion.identity);
-        sections.Add(tmp);
-        sections.Add(tmp2);
+        GameObject tmp3 = Instantiate(section3, new Vector3(1000, 0, 1000), Quaternion.identity);
+        GameObject tmp4 = Instantiate(section4, new Vector3(1000, 0, 1000), Quaternion.identity);
+        sections.Add(new sectionInfo { section = tmp, isActive = true });
+        sections.Add(new sectionInfo { section = tmp2, isActive = true });
+        sections.Add(new sectionInfo { section = tmp3, isActive = false });
+        sections.Add(new sectionInfo { section = tmp4, isActive = false });
 
         inventory = FindAnyObjectByType<Inventory>();
         gameOverScreen.SetActive(false);
-
-        // GameObject tmp3 = Instantiate(section2, new Vector3(0, 0, 100), Quaternion.identity);
-        // GameObject tmp4 = Instantiate(section2, new Vector3(0, 0, 400), Quaternion.identity);
-        // sections.Add(new sectionInfo { section = tmp3, sectionType = "Wall", isActive = false });
-        // sections.Add(new sectionInfo { section = tmp4, sectionType = "Wall", isActive = false });
-        // foreach(sectionInfo sec in sections)
-        // {
-        //     sec.section.SetActive(false);
-        // }
-        // //int index = Random.Range(0, sections.Count);
-        // var result = sections[0];
-        // result.section.SetActive(true);
-        // result.section.transform.localPosition = new Vector3(0, 0, 100);
-        // result.section.GetComponent<Zone>().removeCubesInZone();
-        // result.section.GetComponent<Zone>().createCubesInZone();
-        // result.isActive = true;
-        // sections[0] = result;
-
-        // var result2 = sections[1];
-        // result2.section.SetActive(true);
-        // result2.section.transform.localPosition = new Vector3(0, 0, 400);
-        // result2.section.GetComponent<Zone>().removeCubesInZone();
-        // result2.section.GetComponent<Zone>().createCubesInZone();
-        // result2.isActive = true;
-        // sections[1] = result2;
-
-        // foreach(sectionInfo sec in sections)
-        // {
-        //     Debug.Log($"Section: {sec.sectionType}, Active: {sec.isActive}");
-        // }
 
     }
 
@@ -64,23 +36,18 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         // GameObject toRemove = new GameObject();
-        foreach (GameObject sec in sections)
+        foreach (sectionInfo sec in sections)
         {
-            // if(sections[i].isActive == false)
-            // {
-            //     continue;
-            // }
-            sec.transform.Translate(Vector3.back * Time.deltaTime * floorSpeed, Space.Self);
-            if(sec.transform.localPosition.z <= -180)
+            if(sec.isActive == false)
             {
-                // sectionInfo tmpSec = sections[i];
-                // tmpSec.section.SetActive(false);
-                // tmpSec.isActive = false;
-                // sections[i] = tmpSec;
-                // randomSectionActivation();
-                sec.GetComponent<Zone>().removeCubesInZone();
-                sec.GetComponent<Zone>().createCubesInZone();
-                sec.transform.localPosition = new Vector3(0, 0, 420);
+                continue;
+            }
+            sec.section.transform.Translate(Vector3.back * Time.deltaTime * floorSpeed, Space.Self);
+            if(sec.section.transform.localPosition.z <= -180)
+            {
+                sec.section.transform.localPosition = new Vector3(1000, 0, 1000);
+                sec.isActive = false;
+                randomSectionActivation();
             }
         }
         if (inventory.isGameOver && !gameOverScreen.activeSelf)
@@ -90,27 +57,32 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    // public void randomSectionActivation()
-    // {
-    //     var activeMembers = sections.Where(m => m.isActive == false).ToList();
+    public void randomSectionActivation()
+    {
+        List<int> iactiveIndices = new List<int>();
+        for (int i = 0; i < sections.Count; i++)
+        {
+            if (sections[i].isActive == false)
+            {
+                iactiveIndices.Add(i);
+            }
+        }
+        // Make sure there's actually someone to pick
+        if (iactiveIndices.Count > 0)
+        {
+            int randomIndex = iactiveIndices[UnityEngine.Random.Range(0, iactiveIndices.Count)];
+            Debug.Log($"Selected active struct at index: {randomIndex}");
 
-    //     // Make sure there's actually someone to pick
-    //     if (activeMembers.Any())
-    //     {
-    //         int index = Random.Range(0, activeMembers.Count);
-    //         var result = activeMembers[index];
-    //         result.section.SetActive(true);
-    //         result.section.transform.localPosition = new Vector3(0, 0, 420);
-    //         result.section.GetComponent<Zone>().removeCubesInZone();
-    //         result.section.GetComponent<Zone>().createCubesInZone();
-    //         result.isActive = true;
-    //         sections[index] = result;
-    //     }
-    //     else
-    //     {
-    //         Debug.Log("No active members found.");
-    //     }
-    // }
+            sections[randomIndex].section.transform.localPosition = new Vector3(0, 0, 420);
+            sections[randomIndex].section.GetComponent<Zone>().removeCubesInZone();
+            sections[randomIndex].section.GetComponent<Zone>().createCubesInZone();
+            sections[randomIndex].isActive = true;
+        }
+        else
+        {
+            Debug.Log("No active members found.");
+        }
+    }
 
     public void reload()
     {

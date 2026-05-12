@@ -16,6 +16,7 @@ public class Inventory : MonoBehaviour
     private List<InventoryItem> inventoryItems = new List<InventoryItem>();
     private Dictionary<string, int> colorCounts = new Dictionary<string, int>();
     public bool isGameOver = false;
+    private string[] colors = new string[] { "Red", "Green", "Blue" };
     void Start()
     {
         currentCapacity.Clear();
@@ -52,53 +53,53 @@ public class Inventory : MonoBehaviour
 
     public void CheckForThrees()
     {
-        if (colorCounts["Red"] >= 3)
+        foreach (string color in colors)
         {
-            currentCapacity.RemoveAll(c => c == "Red");
-            foreach (InventoryItem item in inventoryItems)
+            if (colorCounts[color] >= 3)
             {
-                if (item.color == "Red")
-                {
-                    Destroy(item.uiElement);
-                }
+                removeOneColour(color);
             }
-            inventoryItems.RemoveAll(item => item.color == "Red");
-            colorCounts["Red"] = 0;
-            Debug.Log("Removed three red cubes!");
-        }
-        if (colorCounts["Green"] >= 3)
-        {
-            currentCapacity.RemoveAll(c => c == "Green");
-            foreach (InventoryItem item in inventoryItems)
-            {
-                if (item.color == "Green")
-                {
-                    Destroy(item.uiElement);
-                }
-            }
-            inventoryItems.RemoveAll(item => item.color == "Green");
-            colorCounts["Green"] = 0;
-            Debug.Log("Removed three green cubes!");
-        }
-        if (colorCounts["Blue"] >= 3)
-        {
-            currentCapacity.RemoveAll(c => c == "Blue");
-            foreach (InventoryItem item in inventoryItems)
-            {
-                if (item.color == "Blue")
-                {
-                    Destroy(item.uiElement);
-                }
-            }
-            inventoryItems.RemoveAll(item => item.color == "Blue");
-            colorCounts["Blue"] = 0;
-            Debug.Log("Removed three blue cubes!");
         }
     }
     public void shatterCubes()
     {
+        if(currentCapacity.Count == 0)
+        {
+            Debug.Log("No cubes to shatter!");
+            return;
+        }
         int rand = Random.Range(0, currentCapacity.Count);
-        InventoryItem cubeToShatter = inventoryItems[rand];
-        AddToCapacity(cubeToShatter.color);
+        inventoryItems[rand].uiElement.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "Shattered" + inventoryItems[rand].color;
+        currentCapacity.Add(inventoryItems[rand].color);
+        GameObject UIcube = Instantiate(inventorySlotPrefab, inventorySlotParent);
+        UIcube.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "Shattered" + inventoryItems[rand].color;
+        inventoryItems.Add(new InventoryItem { color = inventoryItems[rand].color, uiElement = UIcube });
+    }
+
+    public void removeOneColourFlip()
+    {
+        if(currentCapacity.Count == 0)
+        {
+            Debug.Log("No cubes to remove!");
+            return;
+        }
+        int rand = Random.Range(0, currentCapacity.Count);
+        string color = inventoryItems[rand].color;
+        removeOneColour(color);
+    }
+
+    public void removeOneColour(string color)
+    {
+        currentCapacity.RemoveAll(c => c == color);
+        foreach (InventoryItem item in inventoryItems)
+        {
+            if (item.color == color)
+            {
+                Destroy(item.uiElement);
+            }
+        }
+        inventoryItems.RemoveAll(item => item.color == color);
+        colorCounts[color] = 0;
+        Debug.Log($"Removed three {color} cubes!");
     }
 }

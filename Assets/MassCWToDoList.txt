@@ -1,4 +1,9 @@
-- Mock up of the two other zones.
-- Proper collision of obstacles
-- proper flipping.
-- Defining shatter in a better way than it just duplicating the cubes
+- Mock up of the two other zones. ✓
+- Proper collision of obstacles. ✓
+- proper flipping. ✓
+- Defining shatter in a better way than it just duplicating the cubes. ✓
+
+- Ranbow cube 
+- Scrambler
+- Shatter & Clear
+- Shield Orb

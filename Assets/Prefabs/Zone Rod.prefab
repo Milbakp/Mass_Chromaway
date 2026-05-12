@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 8463686291517414447}
   - component: {fileID: 1367006146028292961}
-  - component: {fileID: 3409574060527355314}
+  - component: {fileID: 3528853036438743058}
   m_Layer: 0
-  m_Name: Zone Wall
+  m_Name: Zone Rod
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -49,10 +49,10 @@ MonoBehaviour:
   section: {fileID: 8777591690738719417}
   cubePrefab: {fileID: 3743375176567328749, guid: 321c9b020f46ed04cbc80a48125eb80c, type: 3}
   cubesInZone: []
-  numberOfCubes: 5
+  numberOfCubes: 7
   zoneSpecial: 0
   removeSpcieal: 0
---- !u!114 &3409574060527355314
+--- !u!114 &3528853036438743058
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -61,13 +61,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 2961842889421348805}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4cfb181cc58e7084bbb9a0cbc6646a04, type: 3}
+  m_Script: {fileID: 11500000, guid: 147a8b56a534dfc49834ae1a53f30302, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wallPrefab: {fileID: 1594370363008896334, guid: ac1630730a49ca44a8cb4b78a5fe9d99, type: 3}
-  wallsInZone: []
+  rodPrefab: {fileID: 4047165213482058632, guid: fd8b040bddcda4b439030f2c20793539, type: 3}
+  rodsInZone: []
   parentZone: {fileID: 0}
-  numberOfWalls: 10
+  numberOfRods: 5
 --- !u!1001 &1006976205664558603
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -12,6 +12,7 @@ public class Jump : MonoBehaviour
     private bool isGrounded;
     private Inventory inventory;
     public float spaceHoldTime = 0f;
+    private float totalRotation = 0f;
     //private bool isBackFlipping = false;
 
     void Start()
@@ -59,6 +60,14 @@ public class Jump : MonoBehaviour
     void backFlip()
     {
         transform.Rotate(Vector3.right * 360 * Time.deltaTime);
+        totalRotation += Mathf.Abs(360 * Time.deltaTime);
+
+        if (totalRotation >= 360f)
+        {
+            inventory.removeOneColourFlip();
+            totalRotation -= 360f; // Keep the remainder
+            Debug.Log("Full Rotation!");
+        }
     }
 
     public float fallMultiplier = 2.5f;
@@ -73,6 +82,21 @@ public class Jump : MonoBehaviour
         else if (rb.linearVelocity.y > 0 && !Input.GetButton("Jump")) // Short jump tap
         {
             rb.linearVelocity += Vector3.up * Physics2D.gravity.y * (lowJumpMultiplier - 1) * Time.deltaTime;
+        }
+    }
+
+    public void incompleteFlip()
+    {
+        transform.rotation = Quaternion.identity;
+        rb.angularVelocity = Vector3.zero;
+        inventory.shatterCubes();
+    }
+    void OnCollisionEnter(Collision collision)
+    {
+        if (collision.collider.gameObject.CompareTag("Ground") && !isGrounded)
+        {
+            incompleteFlip();
+            Debug.Log("Landed on the ground after a flip!");
         }
     }
 }
