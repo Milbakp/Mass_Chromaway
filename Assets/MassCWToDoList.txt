@@ -1,0 +1,4 @@
+- Mock up of the two other zones.
+- Proper collision of obstacles
+- proper flipping.
+- Defining shatter in a better way than it just duplicating the cubes
