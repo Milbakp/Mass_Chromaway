@@ -8,6 +8,12 @@ public class Zone : MonoBehaviour
     public List<GameObject> cubesInZone = new List<GameObject>();
     public int numberOfCubes = 5;
     public bool zoneSpecial = false, removeSpcieal = false;
+    public GameManager gameManager;
+    private GameObject powerUpInZone;
+    void Awake()
+    {
+        gameManager = FindAnyObjectByType<GameManager>();
+    }
     void Start()
     {
         removeCubesInZone();
@@ -42,6 +48,15 @@ public class Zone : MonoBehaviour
             cube.transform.parent = this.transform;
             cubesInZone.Add(cube);
         }
+        // Spawn a random power up in the zone
+        int randomPowerUpIndex = Random.Range(0, gameManager.powerUpPrefabs.Count);
+        float ranX = Random.Range(bounds.min.x + 0.5f, bounds.max.x - 0.5f);
+        float ranZ = Random.Range(bounds.min.z + 0.5f, bounds.max.z - 0.5f);
+        float sY = bounds.max.y + 2f;
+        Vector3 ranPos = new Vector3(ranX, sY, ranZ);
+        powerUpInZone = Instantiate(gameManager.powerUpPrefabs[randomPowerUpIndex], ranPos, Quaternion.identity);
+        powerUpInZone.transform.parent = this.transform;
+
         zoneSpecial = true;
     }
 
@@ -53,5 +68,9 @@ public class Zone : MonoBehaviour
         }
         cubesInZone.Clear();
         removeSpcieal = true;
+        if(powerUpInZone != null)
+        {
+            Destroy(powerUpInZone);
+        }
     }
 }

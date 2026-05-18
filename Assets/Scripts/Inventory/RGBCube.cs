@@ -4,7 +4,7 @@ public class RGBCube : MonoBehaviour
 {
     private Renderer RGBrenderer;
     public string colorType;
-    void Awake()
+    public virtual void Awake()
     {
         RGBrenderer = gameObject.GetComponent<Renderer>();
         int randomIndex = Random.Range(0, 3);

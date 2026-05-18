@@ -4,6 +4,7 @@ public class Vacuum : MonoBehaviour
 {
     public float pullSpeed = 5f;
     public string targetTag = "Item";
+    public string targetTag2 = "PowerUp";
     private Inventory inventory;
     void Awake()
     {
@@ -11,7 +12,7 @@ public class Vacuum : MonoBehaviour
     }
     private void OnTriggerStay(Collider other)
     {
-        if (other.CompareTag(targetTag))
+        if (other.CompareTag(targetTag) || other.CompareTag(targetTag2))
         {
             Vector3 targetPosition = transform.position;
 
@@ -33,8 +34,16 @@ public class Vacuum : MonoBehaviour
 
     void OnCollect(GameObject obj)
     {
-        // Add to inventory logic here
-        //inventory.currentCapacity++;
+        if (obj.CompareTag(targetTag2))
+        {
+            PowerUp powerUp = obj.GetComponent<PowerUp>();
+            if (powerUp != null)
+            {
+                powerUp.ActivatePowerUp();
+            }
+            Destroy(obj);
+            return;
+        }
         inventory.AddToCapacity(obj.GetComponent<RGBCube>().colorType);
         Debug.Log("Object Collected!");
         Destroy(obj); 

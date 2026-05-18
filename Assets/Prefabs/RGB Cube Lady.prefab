@@ -76,7 +76,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ba3689397a0c8b458b229794bc4d074, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pullSpeed: 10
+  pullSpeed: 12
   targetTag: RGBCube
 --- !u!135 &6331995300695615060
 SphereCollider:
@@ -97,7 +97,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.05
+  m_Radius: 0.07
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &9164362037325202627
 PrefabInstance:
@@ -283,7 +283,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52fe490c7a3482147bf2e36ffd58f3de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxCapacity: 5
+  maxCapacity: 6
   inventorySlotPrefab: {fileID: 3740255693832583710, guid: 6475cb96bbe21394dbf75057befdb458, type: 3}
   inventorySlotParent: {fileID: 0}
   currentCapacity: []

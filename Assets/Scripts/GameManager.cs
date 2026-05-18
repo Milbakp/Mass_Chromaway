@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
         // public string sectionType;
         public GameObject section;
     }
+    public List<GameObject> powerUpPrefabs = new List<GameObject>();
     void Start()
     {
         GameObject tmp = Instantiate(section, new Vector3(0, 0, 100), Quaternion.identity);

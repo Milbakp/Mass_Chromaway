@@ -3,7 +3,7 @@ using UnityEngine;
 public class Jump : MonoBehaviour
 {
     [Header("Jump Settings")]
-    public float jumpForce = 7f;
+    public float jumpForce;
     public LayerMask groundLayer;
     public Transform groundCheck;
     public float checkRadius = 0.3f;
@@ -31,6 +31,8 @@ public class Jump : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {
             Jumping();
+            jumpForce = Random.Range(12f, 15f); // Randomize jump force for varied jump height
+            fallMultiplier = Random.Range(4f, 7f); // Randomize fall multiplier for varied jump feel
         }
 
         if(Input.GetKey(KeyCode.Space) && !isGrounded)
