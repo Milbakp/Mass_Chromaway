@@ -52,6 +52,7 @@ MonoBehaviour:
   numberOfCubes: 7
   zoneSpecial: 0
   removeSpcieal: 0
+  gameManager: {fileID: 0}
 --- !u!114 &3528853036438743058
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -67,7 +68,7 @@ MonoBehaviour:
   rodPrefab: {fileID: 4047165213482058632, guid: fd8b040bddcda4b439030f2c20793539, type: 3}
   rodsInZone: []
   parentZone: {fileID: 0}
-  numberOfRods: 5
+  numberOfRods: 7
 --- !u!1001 &1006976205664558603
 PrefabInstance:
   m_ObjectHideFlags: 0
