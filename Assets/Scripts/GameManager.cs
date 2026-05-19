@@ -36,7 +36,6 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // GameObject toRemove = new GameObject();
         foreach (sectionInfo sec in sections)
         {
             if(sec.isActive == false)

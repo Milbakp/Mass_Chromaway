@@ -3,7 +3,7 @@ using UnityEngine;
 public class Jump : MonoBehaviour
 {
     [Header("Jump Settings")]
-    public float jumpForce;
+    public float jumpForce, superJumpForce;
     public LayerMask groundLayer;
     public Transform groundCheck;
     public float checkRadius = 0.3f;
@@ -13,7 +13,7 @@ public class Jump : MonoBehaviour
     private Inventory inventory;
     public float spaceHoldTime = 0f;
     private float totalRotation = 0f;
-    //private bool isBackFlipping = false;
+    public bool superJumpBool = false;
 
     void Start()
     {
@@ -55,9 +55,16 @@ public class Jump : MonoBehaviour
     {
         // Reset Y velocity so every jump is the same height
         rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0, rb.linearVelocity.z);
-        
-        // Use ForceMode.Impulse for immediate 3D force
-        rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+        if(superJumpBool)
+        {
+            rb.AddForce(Vector3.up * superJumpForce, ForceMode.Impulse);
+            superJumpBool = false; // Reset super jump after use
+        }
+        else
+        {
+            rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+        }
+        //rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
     }
     void backFlip()
     {

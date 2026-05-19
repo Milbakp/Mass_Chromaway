@@ -25,6 +25,7 @@ public class Scrambler : PowerUp
             int randomIndex = Random.Range(0, colors.Length);
             inventory.currentCapacity[i] = colors[randomIndex];
             inventory.inventoryItems[i].color = colors[randomIndex];
+            inventory.inventoryItems[i].uiElement.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = colors[randomIndex];
             inventory.colorCounts[colors[randomIndex]]++;
 
             // Might want to look into a way to scramble the shatter cubes as well.
