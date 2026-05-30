@@ -122,6 +122,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80af6cf501cb1b94fa8d408f4d8a994e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  colorType: 
 --- !u!95 &83422428686718260
 Animator:
   serializedVersion: 7

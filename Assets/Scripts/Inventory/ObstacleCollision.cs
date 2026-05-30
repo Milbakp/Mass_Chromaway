@@ -5,9 +5,12 @@ public class ObstacleCollision : MonoBehaviour
     private Inventory inventory;
     public bool hasShield = false;
     public GameObject shieldEffect; // Assign a shield effect prefab in the Inspector
+    public AudioSource sfxAudio;
+    public AudioClip smashClip;
     void Start()
     {
         inventory = FindAnyObjectByType<Inventory>();
+        sfxAudio = GetComponent<AudioSource>();
         hasShield = false;
         shieldEffect.SetActive(false);
     }
@@ -34,6 +37,7 @@ public class ObstacleCollision : MonoBehaviour
                 shieldEffect.SetActive(false);
                 Debug.Log("Shield absorbed the collision!");
             }
+            sfxAudio.PlayOneShot(smashClip);
         }
     }
 }

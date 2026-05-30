@@ -29,4 +29,9 @@ public class Shatter_Clear : PowerUp
         //     inventory.colorCounts[colors[randomIndex]]++;
         // }
     }
+
+    public override void SoundEffect()
+    {
+        audioManager.playPowerUpClips(0);
+    }
 }

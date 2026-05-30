@@ -6,9 +6,12 @@ public class Vacuum : MonoBehaviour
     public string targetTag = "Item";
     public string targetTag2 = "PowerUp";
     private Inventory inventory;
+    private AudioSource sfxAudio;
+    public AudioClip sfxClip;
     void Awake()
     {
         inventory = FindAnyObjectByType<Inventory>();
+        sfxAudio = GetComponent<AudioSource>();
     }
     private void OnTriggerStay(Collider other)
     {
@@ -40,12 +43,14 @@ public class Vacuum : MonoBehaviour
             if (powerUp != null)
             {
                 powerUp.ActivatePowerUp();
+                powerUp.SoundEffect();
             }
             Destroy(obj);
             return;
         }
+        sfxAudio.PlayOneShot(sfxClip);
         inventory.AddToCapacity(obj.GetComponent<RGBCube>().colorType);
-        Debug.Log("Object Collected!");
+        //Debug.Log("Object Collected!");
         Destroy(obj); 
     }
 }

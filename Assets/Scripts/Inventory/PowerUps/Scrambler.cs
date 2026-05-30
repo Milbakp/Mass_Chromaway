@@ -26,6 +26,7 @@ public class Scrambler : PowerUp
             inventory.currentCapacity[i] = colors[randomIndex];
             inventory.inventoryItems[i].color = colors[randomIndex];
             inventory.inventoryItems[i].uiElement.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = colors[randomIndex];
+            inventory.inventoryItems[i].uiElement.transform.GetChild(1).GetComponent<UIRGBCube>().setColor(colors[randomIndex]);
             inventory.colorCounts[colors[randomIndex]]++;
 
             // Might want to look into a way to scramble the shatter cubes as well.
@@ -40,7 +41,11 @@ public class Scrambler : PowerUp
             
         }
         //inventory.colorCounts.Clear();
-        
         Debug.Log("Inventory scrambled!");
+    }
+
+    public override void SoundEffect()
+    {
+        audioManager.playPowerUpClips(1);
     }
 }

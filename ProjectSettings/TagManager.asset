@@ -8,6 +8,8 @@ TagManager:
   - Ground
   - Obstacle
   - PowerUp
+  - BGM
+  - SFX
   layers:
   - Default
   - TransparentFX

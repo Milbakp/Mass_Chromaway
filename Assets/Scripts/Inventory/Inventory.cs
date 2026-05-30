@@ -12,13 +12,15 @@ public class Inventory : MonoBehaviour
         public bool isShattered = false;
     }
     public int maxCapacity;
-    public GameObject inventorySlotPrefab;
+    public GameObject inventorySlotPrefab, cubePrefab;
     public Transform inventorySlotParent;
     public List<string> currentCapacity = new List<string>();
     public List<InventoryItem> inventoryItems = new List<InventoryItem>();
     public Dictionary<string, int> colorCounts = new Dictionary<string, int>();
     public bool isGameOver = false;
     private string[] colors = new string[] { "Red", "Green", "Blue" };
+    private AudioSource sfxAudio;
+    public AudioClip clearColourClip;
     void Start()
     {
         currentCapacity.Clear();
@@ -32,6 +34,8 @@ public class Inventory : MonoBehaviour
         colorCounts["Green"] = 0;
         colorCounts["Blue"] = 0;
         colorCounts["Rainbow"] = 0;
+
+        sfxAudio = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -50,6 +54,10 @@ public class Inventory : MonoBehaviour
         currentCapacity.Add(color);
         GameObject UIcube = Instantiate(inventorySlotPrefab, inventorySlotParent);
         UIcube.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = color;
+
+        GameObject cube = Instantiate(cubePrefab, UIcube.transform);
+        cube.GetComponent<UIRGBCube>().setColor(color);
+
         inventoryItems.Add(new InventoryItem { color = color, uiElement = UIcube });
         colorCounts[color] = colorCounts.GetValueOrDefault(color, 0) + 1;
     }
@@ -98,10 +106,18 @@ public class Inventory : MonoBehaviour
         }
 
         inventoryItems[rand].uiElement.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "Shattered" + inventoryItems[rand].color;
+        UIRGBCube uiRGB1 = inventoryItems[rand].uiElement.transform.GetChild(1).GetComponent<UIRGBCube>();
+        uiRGB1.shatterImage();
         inventoryItems[rand].isShattered = true;
         currentCapacity.Add(inventoryItems[rand].color);
+
+
         GameObject UIcube = Instantiate(inventorySlotPrefab, inventorySlotParent);
         UIcube.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "Shattered" + inventoryItems[rand].color;
+        GameObject cube = Instantiate(cubePrefab, UIcube.transform);
+        UIRGBCube uiRGB2 = cube.GetComponent<UIRGBCube>();
+        uiRGB2.setColor(inventoryItems[rand].color);
+        uiRGB2.shatterImage();
         inventoryItems.Add(new InventoryItem { color = inventoryItems[rand].color, uiElement = UIcube, isShattered = true });
     }
 
@@ -118,10 +134,18 @@ public class Inventory : MonoBehaviour
             if(inventoryItems[i].color == color && !inventoryItems[i].isShattered)
             {
                 inventoryItems[i].uiElement.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "Shattered" + inventoryItems[i].color;
+                UIRGBCube uiRGB1 = inventoryItems[i].uiElement.transform.GetChild(1).GetComponent<UIRGBCube>();
+                uiRGB1.shatterImage();
                 inventoryItems[i].isShattered = true;
                 currentCapacity.Add(inventoryItems[i].color);
                 GameObject UIcube = Instantiate(inventorySlotPrefab, inventorySlotParent);
                 UIcube.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "Shattered" + inventoryItems[i].color;
+
+                GameObject cube = Instantiate(cubePrefab, UIcube.transform);
+                UIRGBCube uiRGB = cube.GetComponent<UIRGBCube>();
+                uiRGB.setColor(inventoryItems[i].color);
+                uiRGB.shatterImage();
+
                 inventoryItems.Add(new InventoryItem { color = inventoryItems[i].color, uiElement = UIcube, isShattered = true });
                 return;
             }
@@ -153,5 +177,6 @@ public class Inventory : MonoBehaviour
         inventoryItems.RemoveAll(item => item.color == color);
         colorCounts[color] = 0;
         Debug.Log($"Removed three {color} cubes!");
+        sfxAudio.PlayOneShot(clearColourClip);
     }
 }

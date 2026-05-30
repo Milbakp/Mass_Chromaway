@@ -14,12 +14,14 @@ public class Jump : MonoBehaviour
     public float spaceHoldTime = 0f;
     private float totalRotation = 0f;
     public bool superJumpBool = false;
+    private AudioSource sfxAudio;
+    public AudioClip jumpClip, smashClip; // Might want sfx for flip.
 
     void Start()
     {
-        // Get the 3D Rigidbody
         rb = GetComponent<Rigidbody>();
         inventory = FindAnyObjectByType<Inventory>();
+        sfxAudio = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -30,6 +32,7 @@ public class Jump : MonoBehaviour
         // Jump Input
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {
+            sfxAudio.PlayOneShot(jumpClip);
             Jumping();
             jumpForce = Random.Range(12f, 15f); // Randomize jump force for varied jump height
             fallMultiplier = Random.Range(4f, 7f); // Randomize fall multiplier for varied jump feel
@@ -98,6 +101,7 @@ public class Jump : MonoBehaviour
     {
         transform.rotation = Quaternion.identity;
         rb.angularVelocity = Vector3.zero;
+        sfxAudio.PlayOneShot(smashClip);
         inventory.shatterCubes();
     }
     void OnCollisionEnter(Collision collision)

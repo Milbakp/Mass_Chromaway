@@ -21,8 +21,8 @@ public class GameManager : MonoBehaviour
     {
         GameObject tmp = Instantiate(section, new Vector3(0, 0, 100), Quaternion.identity);
         GameObject tmp2 = Instantiate(section2, new Vector3(0, 0, 400), Quaternion.identity);
-        GameObject tmp3 = Instantiate(section3, new Vector3(1000, 0, 1000), Quaternion.identity);
-        GameObject tmp4 = Instantiate(section4, new Vector3(1000, 0, 1000), Quaternion.identity);
+        GameObject tmp3 = Instantiate(section3, new Vector3(2000, 0, 1000), Quaternion.identity);
+        GameObject tmp4 = Instantiate(section4, new Vector3(2000, 0, 1000), Quaternion.identity);
         sections.Add(new sectionInfo { section = tmp, isActive = true });
         sections.Add(new sectionInfo { section = tmp2, isActive = true });
         sections.Add(new sectionInfo { section = tmp3, isActive = false });
@@ -45,7 +45,7 @@ public class GameManager : MonoBehaviour
             sec.section.transform.Translate(Vector3.back * Time.deltaTime * floorSpeed, Space.Self);
             if(sec.section.transform.localPosition.z <= -180)
             {
-                sec.section.transform.localPosition = new Vector3(1000, 0, 1000);
+                sec.section.transform.localPosition = new Vector3(2000, 0, 1000);
                 sec.isActive = false;
                 randomSectionActivation();
             }

@@ -14,4 +14,8 @@ public class CubeShield : PowerUp
         obstacleCollision.hasShield = true;
         Debug.Log("Cube Shield Activated! You are now protected from the next obstacle collision.");
     }
+    public override void SoundEffect()
+    {
+        audioManager.playPowerUpClips(2);
+    }
 }
