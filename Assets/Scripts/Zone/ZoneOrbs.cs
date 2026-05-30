@@ -48,7 +48,7 @@ public class ZoneOrbs : MonoBehaviour
             Vector3 randomPos = new Vector3(randomX, spawnY, randomZ);
 
             // Instantiate the orb
-            GameObject orb = Instantiate(orbPrefab, randomPos, Quaternion.identity);
+            GameObject orb = Instantiate(orbPrefab, randomPos, Random.rotationUniform);
             orb.transform.parent = this.transform;
             orbsInZone.Add(orb);
         }
