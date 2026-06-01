@@ -18,9 +18,11 @@ public class Inventory : MonoBehaviour
     public List<InventoryItem> inventoryItems = new List<InventoryItem>();
     public Dictionary<string, int> colorCounts = new Dictionary<string, int>();
     public bool isGameOver = false;
-    private string[] colors = new string[] { "Red", "Green", "Blue" };
+    private string[] colors = { "Red", "Green", "Blue" };
     private AudioSource sfxAudio;
     public AudioClip clearColourClip;
+    // How many cubes you destroyed.
+    public int numOfDestroyedCubes = 0;
     void Start()
     {
         currentCapacity.Clear();
@@ -173,10 +175,12 @@ public class Inventory : MonoBehaviour
             {
                 Destroy(item.uiElement);
             }
+            numOfDestroyedCubes++;
         }
         inventoryItems.RemoveAll(item => item.color == color);
         colorCounts[color] = 0;
         Debug.Log($"Removed three {color} cubes!");
         sfxAudio.PlayOneShot(clearColourClip);
     }
+
 }

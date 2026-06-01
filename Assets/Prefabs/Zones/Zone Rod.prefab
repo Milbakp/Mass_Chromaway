@@ -65,7 +65,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 147a8b56a534dfc49834ae1a53f30302, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rodPrefab: {fileID: 2264439879702875305, guid: 9bb6bfaaa413dfc4b8788bca91a6ae4e, type: 3}
+  rodPrefab: {fileID: 5621601026767445040, guid: b60d0d57fedc10e4c8af43f98688645e, type: 3}
   rodsInZone: []
   parentZone: {fileID: 0}
   numberOfRods: 7

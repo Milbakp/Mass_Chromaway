@@ -8,8 +8,9 @@ public class GameManager : MonoBehaviour
     public GameObject section, section2, section3, section4;
     public List<sectionInfo> sections = new List<sectionInfo>();
     public float floorSpeed = 2;
-    public Inventory inventory = new Inventory();
+    public Inventory inventory;
     public GameObject gameOverScreen;
+    private PlayButtonSound playButtonSound;
     public class sectionInfo
     {
         public bool isActive;
@@ -30,6 +31,8 @@ public class GameManager : MonoBehaviour
 
         inventory = FindAnyObjectByType<Inventory>();
         gameOverScreen.SetActive(false);
+
+        playButtonSound = FindAnyObjectByType<PlayButtonSound>();
 
     }
 
@@ -88,6 +91,13 @@ public class GameManager : MonoBehaviour
     {
         Time.timeScale = 1f;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        playButtonSound.PlaySound();
+    }
+    public void returnToMenu()
+    {
+        Time.timeScale = 1f;
+        SceneManager.LoadScene("MenuScene");
+        playButtonSound.PlaySound();
     }
 
 }

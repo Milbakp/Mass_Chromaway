@@ -161,7 +161,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   minForce: 6
   maxForce: 9
-  minAngle: 30
-  maxAngle: 60
+  minAngle: 10
+  maxAngle: 45
   minSpread: 90
   maxSpread: 270

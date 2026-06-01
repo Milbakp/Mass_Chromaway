@@ -41,8 +41,11 @@ public class ZoneRod : MonoBehaviour
 
             Vector3 randomPos = new Vector3(randomX, spawnY, randomZ);
 
+            // Random y Rotation
+            float randomY = Random.Range(0f, 360f);
+
             // Instantiate the rod
-            GameObject rod = Instantiate(rodPrefab, randomPos, Quaternion.identity);
+            GameObject rod = Instantiate(rodPrefab, randomPos, Quaternion.Euler(0f, randomY, 0f));
             rod.transform.parent = this.transform;
             rodsInZone.Add(rod);
         }
