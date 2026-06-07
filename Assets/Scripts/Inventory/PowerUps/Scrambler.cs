@@ -20,6 +20,7 @@ public class Scrambler : PowerUp
             }
             if(inventory.inventoryItems[i].isShattered)
             {
+                inventory.colorCounts[inventory.inventoryItems[i].color]++;
                 continue; // Skip scrambling shattered cubes
             }
             int randomIndex = Random.Range(0, colors.Length);

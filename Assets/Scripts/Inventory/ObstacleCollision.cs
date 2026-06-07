@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public class ObstacleCollision : MonoBehaviour
 {
@@ -14,13 +15,7 @@ public class ObstacleCollision : MonoBehaviour
         hasShield = false;
         shieldEffect.SetActive(false);
     }
-    void Update()
-    {
-        if (hasShield && !shieldEffect.activeInHierarchy)
-        {
-            shieldEffect.SetActive(true);
-        }
-    }
+
     void OnCollisionEnter(Collision collision)
     {
         //Debug.Log("Collided with: " + collision.gameObject.name);
@@ -33,11 +28,17 @@ public class ObstacleCollision : MonoBehaviour
             }
             else
             {
-                hasShield = false;
                 shieldEffect.SetActive(false);
+                StartCoroutine(deactiveShieldEffect(1f)); // Deactivate shield after 1 second, this is so the player passes through the obstacle before the shield deactivates
                 Debug.Log("Shield absorbed the collision!");
             }
             sfxAudio.PlayOneShot(smashClip);
         }
+    }
+
+    IEnumerator deactiveShieldEffect(float duration)
+    {
+        yield return new WaitForSeconds(duration);
+        hasShield = false;
     }
 }

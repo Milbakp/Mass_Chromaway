@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     public Inventory inventory;
     public GameObject gameOverScreen;
     private PlayButtonSound playButtonSound;
+    private StartingAnimation startingAnimation;
     public class sectionInfo
     {
         public bool isActive;
@@ -18,6 +19,8 @@ public class GameManager : MonoBehaviour
         public GameObject section;
     }
     public List<GameObject> powerUpPrefabs = new List<GameObject>();
+    public bool startGame = false;
+    public GameObject BGM;
     void Start()
     {
         GameObject tmp = Instantiate(section, new Vector3(0, 0, 100), Quaternion.identity);
@@ -33,12 +36,16 @@ public class GameManager : MonoBehaviour
         gameOverScreen.SetActive(false);
 
         playButtonSound = FindAnyObjectByType<PlayButtonSound>();
-
+        startingAnimation = FindAnyObjectByType<StartingAnimation>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (!startGame || startingAnimation.isGameOver)
+        {
+            return;
+        }
         foreach (sectionInfo sec in sections)
         {
             if(sec.isActive == false)
@@ -53,10 +60,12 @@ public class GameManager : MonoBehaviour
                 randomSectionActivation();
             }
         }
-        if (inventory.isGameOver && !gameOverScreen.activeSelf)
+        if (inventory.isGameOver && !gameOverScreen.activeSelf && !startingAnimation.isGameOver)
         {
-            Time.timeScale = 0f;
-            gameOverScreen.SetActive(true);
+            BGM.GetComponent<AudioSource>().Stop();
+            startingAnimation.StartCoroutine(startingAnimation.GameOverAnimation());
+            // Time.timeScale = 0f;
+            // gameOverScreen.SetActive(true);
         }
     }
 

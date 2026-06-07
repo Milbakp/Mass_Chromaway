@@ -12,6 +12,13 @@ public class BlackholeSize : MonoBehaviour
     }
     void Update()
     {
+        if(inventory.isGameOver)
+        {
+            float BigScale = 5 * originalScale;
+            scale = new Vector3(BigScale, BigScale, BigScale);
+            gameObject.transform.localScale = scale;
+            return;
+        }
         float newScale = (increaseTotal * inventory.currentCapacity.Count/inventory.maxCapacity) + originalScale;
         scale = new Vector3(newScale, newScale, newScale);
         gameObject.transform.localScale = scale;
