@@ -27,7 +27,20 @@ public class Menu : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        // Remove this code in release builds, it's just for testing purposes to clear PlayerPrefs when Ctrl + R is pressed.
+        if(Input.GetKeyDown(KeyCode.R) && Input.GetKey(KeyCode.LeftControl))
+        {
+            resetPlayerPrefs();
+        }
+    }
+    private void resetPlayerPrefs()
+    {
+        //#if UNITY_EDITOR
+            // This line only exists in the Unity Editor
+            PlayerPrefs.DeleteAll();
+            PlayerPrefs.Save();
+            Debug.Log("PlayerPrefs have been cleared.");
+        //#endif
     }
 
     public void playGame()

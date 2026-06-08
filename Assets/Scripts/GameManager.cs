@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour
     public List<sectionInfo> sections = new List<sectionInfo>();
     public float floorSpeed = 2;
     public Inventory inventory;
-    public GameObject gameOverScreen;
+    public GameObject gameOverScreen, pauseScreen;
     private PlayButtonSound playButtonSound;
     private StartingAnimation startingAnimation;
     public class sectionInfo
@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour
     }
     public List<GameObject> powerUpPrefabs = new List<GameObject>();
     public bool startGame = false;
+    public bool pauseGame = false;
     public GameObject BGM;
     void Start()
     {
@@ -34,6 +35,7 @@ public class GameManager : MonoBehaviour
 
         inventory = FindAnyObjectByType<Inventory>();
         gameOverScreen.SetActive(false);
+        pauseScreen.SetActive(false);
 
         playButtonSound = FindAnyObjectByType<PlayButtonSound>();
         startingAnimation = FindAnyObjectByType<StartingAnimation>();
@@ -42,7 +44,14 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!startGame || startingAnimation.isGameOver)
+        if (Input.GetKeyDown(KeyCode.Escape) && !startingAnimation.isGameOver)
+        {
+            pauseGame = true;
+            pauseScreen.SetActive(true);
+            Time.timeScale = 0f;
+            return;
+        }
+        if (!startGame || startingAnimation.isGameOver || pauseGame)
         {
             return;
         }
@@ -106,6 +115,14 @@ public class GameManager : MonoBehaviour
     {
         Time.timeScale = 1f;
         SceneManager.LoadScene("MenuScene");
+        playButtonSound.PlaySound();
+    }
+
+    public void resumeGame()
+    {
+        Time.timeScale = 1f;
+        pauseGame = false;
+        pauseScreen.SetActive(false);
         playButtonSound.PlaySound();
     }
 

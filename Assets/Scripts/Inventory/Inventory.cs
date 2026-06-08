@@ -168,6 +168,7 @@ public class Inventory : MonoBehaviour
 
     public void removeOneColour(string color)
     {
+        numOfDestroyedCubes += colorCounts[color];
         currentCapacity.RemoveAll(c => c == color);
         foreach (InventoryItem item in inventoryItems)
         {
@@ -175,7 +176,6 @@ public class Inventory : MonoBehaviour
             {
                 Destroy(item.uiElement);
             }
-            numOfDestroyedCubes++;
         }
         inventoryItems.RemoveAll(item => item.color == color);
         colorCounts[color] = 0;
