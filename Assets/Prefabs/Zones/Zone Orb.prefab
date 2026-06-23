@@ -104,7 +104,8 @@ MonoBehaviour:
   section: {fileID: 1780262865845997602}
   cubePrefab: {fileID: 3743375176567328749, guid: 321c9b020f46ed04cbc80a48125eb80c, type: 3}
   cubesInZone: []
-  numberOfCubes: 7
+  MinNumberOfCubes: 5
+  MaxNumberOfCubes: 10
   zoneSpecial: 0
   removeSpcieal: 0
   gameManager: {fileID: 0}
@@ -123,7 +124,8 @@ MonoBehaviour:
   orbPrefab: {fileID: 3690187387069450101, guid: 5a02e46d591364b40958c14c7be7d766, type: 3}
   orbsInZone: []
   parentZone: {fileID: 0}
-  numberOfOrbs: 10
+  MinNumberOfOrbs: 6
+  MaxNumberOfOrbs: 12
 --- !u!1 &7949046341771065489
 GameObject:
   m_ObjectHideFlags: 0

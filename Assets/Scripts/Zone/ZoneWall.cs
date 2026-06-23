@@ -6,7 +6,8 @@ public class ZoneWall : MonoBehaviour
     public GameObject wallPrefab;
     public List<GameObject> wallsInZone = new List<GameObject>();
     public Zone parentZone;
-    public int numberOfWalls = 5;
+    public int MinNumberOfWalls = 5;
+    public int MaxNumberOfWalls = 10;
     void Start()
     {
         parentZone = GetComponent<Zone>();
@@ -30,7 +31,9 @@ public class ZoneWall : MonoBehaviour
         MeshRenderer plateRenderer = parentZone.section.GetComponent<MeshRenderer>();
         Bounds bounds = plateRenderer.bounds;
 
-        for (int i = 0; i < numberOfWalls; i++)
+        int randomNumOfWalls = Random.Range(MinNumberOfWalls, MaxNumberOfWalls);
+
+        for (int i = 0; i < randomNumOfWalls; i++)
         {
             // Calculate random X and Z within the platform bounds
             // We subtract a small offset so cubes don't hang off the edge

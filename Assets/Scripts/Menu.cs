@@ -2,11 +2,13 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
 using System;
+using UnityEngine.UI;
 public class Menu : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public GameObject menu, settings;
     public TMP_Text timeText, cubeClearedText;
+    public Toggle stellarMode; 
     private PlayButtonSound playButtonSound;
     void Start()
     {
@@ -19,6 +21,8 @@ public class Menu : MonoBehaviour
         timeText.text =  minutes.ToString() + ":" + seconds.ToString("D2");
 
         cubeClearedText.text = PlayerPrefs.GetInt("CUBESCORE", 0).ToString();
+
+        stellarMode.isOn = PlayerPrefs.GetInt("STELLARMODE", 0) == 1 ? true : false;
 
         playButtonSound = FindAnyObjectByType<PlayButtonSound>();
 
@@ -52,6 +56,11 @@ public class Menu : MonoBehaviour
     {
         menu.SetActive(!menu.activeInHierarchy);
         settings.SetActive(!settings.activeInHierarchy);
+        playButtonSound.PlaySound();
+    }
+    public void toggleStellarMode()
+    {
+        PlayerPrefs.SetInt("STELLARMODE", stellarMode.isOn ? 1 : 0);
         playButtonSound.PlaySound();
     }
     public void quit()

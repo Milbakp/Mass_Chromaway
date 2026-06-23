@@ -16,12 +16,14 @@ public class Jump : MonoBehaviour
     public bool superJumpBool = false;
     private AudioSource sfxAudio;
     public AudioClip jumpClip, smashClip; // Might want sfx for flip.
+    private SJIndicator sjIndicator;
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         inventory = FindAnyObjectByType<Inventory>();
         sfxAudio = GetComponent<AudioSource>();
+        sjIndicator = FindAnyObjectByType<SJIndicator>();
     }
 
     void Update()
@@ -61,6 +63,7 @@ public class Jump : MonoBehaviour
         if(superJumpBool)
         {
             rb.AddForce(Vector3.up * superJumpForce, ForceMode.Impulse);
+            sjIndicator.superJumpIndicator.SetActive(false);
             superJumpBool = false; // Reset super jump after use
         }
         else

@@ -6,7 +6,8 @@ public class Zone : MonoBehaviour
     public GameObject section;
     public GameObject cubePrefab;
     public List<GameObject> cubesInZone = new List<GameObject>();
-    public int numberOfCubes = 5;
+    public int MinNumberOfCubes = 5;
+    public int MaxNumberOfCubes = 10;
     public bool zoneSpecial = false, removeSpcieal = false;
     public GameManager gameManager;
     private GameObject powerUpInZone;
@@ -31,7 +32,9 @@ public class Zone : MonoBehaviour
         MeshRenderer plateRenderer = section.GetComponent<MeshRenderer>();
         Bounds bounds = plateRenderer.bounds;
 
-        for (int i = 0; i < numberOfCubes; i++)
+        int randomNumOfCubes = Random.Range(MinNumberOfCubes, MaxNumberOfCubes); // Random number of cubes between MinNumberOfCubes and MaxNumberOfCubes
+
+        for (int i = 0; i < randomNumOfCubes; i++)
         {
             // Calculate random X and Z within the platform bounds
             // We subtract a small offset so cubes don't hang off the edge

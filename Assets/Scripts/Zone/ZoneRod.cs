@@ -6,7 +6,8 @@ public class ZoneRod : MonoBehaviour
     public GameObject rodPrefab;
     public List<GameObject> rodsInZone = new List<GameObject>();
     public Zone parentZone;
-    public int numberOfRods = 5;
+    public int MinNumberOfRods = 5;
+    public int MaxNumberOfRods = 10;
     void Start()
     {
         parentZone = GetComponent<Zone>();
@@ -29,7 +30,9 @@ public class ZoneRod : MonoBehaviour
         MeshRenderer plateRenderer = parentZone.section.GetComponent<MeshRenderer>();
         Bounds bounds = plateRenderer.bounds;
 
-        for (int i = 0; i < numberOfRods; i++)
+        int randomNumOfRods = Random.Range(MinNumberOfRods, MaxNumberOfRods);
+
+        for (int i = 0; i < randomNumOfRods; i++)
         {
             // Calculate random X and Z within the platform bounds
             // We subtract a small offset so cubes don't hang off the edge

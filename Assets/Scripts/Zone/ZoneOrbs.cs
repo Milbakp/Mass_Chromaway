@@ -6,7 +6,8 @@ public class ZoneOrbs : MonoBehaviour
     public GameObject orbPrefab;
     public List<GameObject> orbsInZone = new List<GameObject>();
     public Zone parentZone;
-    public int numberOfOrbs = 5;
+    public int MinNumberOfOrbs = 5;
+    public int MaxNumberOfOrbs = 10;
     bool orbsLaunched = false;
     void Start()
     {
@@ -35,7 +36,9 @@ public class ZoneOrbs : MonoBehaviour
         MeshRenderer plateRenderer = parentZone.section.GetComponent<MeshRenderer>();
         Bounds bounds = plateRenderer.bounds;
 
-        for (int i = 0; i < numberOfOrbs; i++)
+        int randomNumOfOrbs = Random.Range(MinNumberOfOrbs, MaxNumberOfOrbs);
+
+        for (int i = 0; i < randomNumOfOrbs; i++)
         {
             // Calculate random X and Z within the platform bounds
             // We subtract a small offset so cubes don't hang off the edge
