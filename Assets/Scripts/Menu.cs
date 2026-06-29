@@ -9,7 +9,7 @@ public class Menu : MonoBehaviour
     public GameObject menu, settings;
     public TMP_Text timeText, cubeClearedText;
     public Toggle stellarMode; 
-    private PlayButtonSound playButtonSound;
+    //public PlayButtonSound playButtonSound;
     void Start()
     {
         menu.SetActive(true);
@@ -24,8 +24,7 @@ public class Menu : MonoBehaviour
 
         stellarMode.isOn = PlayerPrefs.GetInt("STELLARMODE", 0) == 1 ? true : false;
 
-        playButtonSound = FindAnyObjectByType<PlayButtonSound>();
-
+        //playButtonSound = FindAnyObjectByType<PlayButtonSound>();
     }
 
     // Update is called once per frame
@@ -50,18 +49,18 @@ public class Menu : MonoBehaviour
     public void playGame()
     {
         SceneManager.LoadScene("EndlessRunner");
-        playButtonSound.PlaySound();
+        PlayButtonSound.Instance.PlaySound();
     }
     public void toggleMenu()
     {
         menu.SetActive(!menu.activeInHierarchy);
         settings.SetActive(!settings.activeInHierarchy);
-        playButtonSound.PlaySound();
+        PlayButtonSound.Instance.PlaySound();
     }
     public void toggleStellarMode()
     {
         PlayerPrefs.SetInt("STELLARMODE", stellarMode.isOn ? 1 : 0);
-        playButtonSound.PlaySound();
+        PlayButtonSound.Instance.PlaySound();
     }
     public void quit()
     {

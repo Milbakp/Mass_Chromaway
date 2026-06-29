@@ -1569,6 +1569,7 @@ MonoBehaviour:
   timeText: {fileID: 764163731}
   cubeClearedText: {fileID: 773890941}
   stellarMode: {fileID: 192628541}
+  playButtonSound: {fileID: 145014098}
 --- !u!1 &764163729
 GameObject:
   m_ObjectHideFlags: 0
