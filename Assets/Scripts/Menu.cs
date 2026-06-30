@@ -62,6 +62,11 @@ public class Menu : MonoBehaviour
         PlayerPrefs.SetInt("STELLARMODE", stellarMode.isOn ? 1 : 0);
         PlayButtonSound.Instance.PlaySound();
     }
+    public void HowToPlay()
+    {
+        SceneManager.LoadScene("HowToPlay");
+        PlayButtonSound.Instance.PlaySound();
+    }
     public void quit()
     {
         Application.Quit();
